@@ -8,7 +8,7 @@ module Devise
         from_queue "devise_mailer"
 
         def self.enqueue(*args)
-          ::Sneakers::Publisher.new.publish(args.to_json, self.queue_name)
+          ::Sneakers::Publisher.new.publish(args.to_json, {:to_queue => self.queue_name})
         end
 
         def work(json_string)
